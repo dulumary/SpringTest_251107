@@ -39,4 +39,9 @@ public class RealEstateService {
         return realEstateList;
 
     }
+
+    public int createRealEstateByObject(RealEstate realEstate) {
+        int count = realEstateRepository.insertRealEstateByObject(realEstate);
+        return count;
+    }
 }

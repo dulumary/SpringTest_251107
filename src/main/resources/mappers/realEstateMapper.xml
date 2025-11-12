@@ -65,4 +65,26 @@
             ]]>
     </select>
 
+    <insert id="insertRealEstateByObject"
+    parameterType="com.marondal.springtest.mybatis.domain.RealEstate">
+        INSERT INTO
+            `real_estate`
+        (
+            `realtor_id`
+            , `address`
+            , `area`
+            , `type`
+            , `price`
+        )
+        VALUE
+        (
+            #{realtorId}
+            , #{address}
+            , #{area}
+            , #{type}
+            , #{price}
+        )
+
+    </insert>
+
 </mapper>

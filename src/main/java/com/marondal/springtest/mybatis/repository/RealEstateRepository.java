@@ -19,4 +19,6 @@ public interface RealEstateRepository {
             @Param("area") int area
             , @Param("price") int price);
 
+    public int insertRealEstateByObject(RealEstate realEstate);
+
 }

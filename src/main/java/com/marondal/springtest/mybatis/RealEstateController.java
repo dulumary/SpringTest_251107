@@ -49,4 +49,25 @@ public class RealEstateController {
 
     }
 
+    @ResponseBody
+    @RequestMapping("/insert/1")
+    public String addRealEstate() {
+//        realtorId : 3
+//        address : 푸르지용 리버 303동 1104호
+//        area : 89
+//        type : 매매
+//        price : 100000
+
+        RealEstate realEstate = new RealEstate();
+        realEstate.setRealtorId(3);
+        realEstate.setAddress("푸르지용 리버 303동 1104호");
+        realEstate.setArea(89);
+        realEstate.setType("매매");
+        realEstate.setPrice(100000);
+
+        int count = realEstateService.createRealEstateByObject(realEstate);
+
+        return "입력 성공 : " + count;
+    }
+
 }
