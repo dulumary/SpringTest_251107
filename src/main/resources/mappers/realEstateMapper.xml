@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.marondal.springtest.mybatis.repository.RealEstateRepository">
+
+    <select id="selectRealEstate" parameterType="int"
+    resultType="com.marondal.springtest.mybatis.domain.RealEstate">
+        SELECT
+            `id`
+             , `realtor_id`
+             , `address`
+             , `area`
+             , `type`
+             , `price`
+             , `rent_price`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `real_estate`
+        WHERE
+            `id` = #{id}
+    </select>
+
+    <select id="selectRealEstateListByRentPrice" parameterType="int"
+    resultType="com.marondal.springtest.mybatis.domain.RealEstate">
+        SELECT
+            `id`
+             , `realtor_id`
+             , `address`
+             , `area`
+             , `type`
+             , `price`
+             , `rent_price`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `real_estate`
+        WHERE
+            <![CDATA[
+            `type` = '월세'
+            AND `rent_price` < #{rentPrice}
+            ]]>
+    </select>
+
+    <select id="selectRealEstateListByAreaAndPrice" parameterType="map"
+    resultType="com.marondal.springtest.mybatis.domain.RealEstate">
+        SELECT
+            `id`
+             , `realtor_id`
+             , `address`
+             , `area`
+             , `type`
+             , `price`
+             , `rent_price`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `real_estate`
+        WHERE
+            <![CDATA[
+            `area` >= #{area}
+            AND `price` <= #{price}
+            ]]>
+    </select>
+
+</mapper>
