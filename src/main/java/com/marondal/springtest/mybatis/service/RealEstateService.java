@@ -44,4 +44,33 @@ public class RealEstateService {
         int count = realEstateRepository.insertRealEstateByObject(realEstate);
         return count;
     }
+
+    public int createRealEstate(
+            int realtorId
+            , String address
+            , int area
+            , String type
+            , int price
+            , int rentPrice) {
+
+        int count = realEstateRepository.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+
+        return count;
+    }
+
+    // 특정 id의 매물 정보의 type과 가격을 수정하는 기능
+    public int updateRealEstate(int id, String type, int price) {
+
+        int count = realEstateRepository.updateRealEstate(id, type, price);
+
+        return count;
+    }
+
+    public int deleteRealEstate(int id) {
+
+        int count = realEstateRepository.deleteRealEstate(id);
+
+        return count;
+    }
+
 }

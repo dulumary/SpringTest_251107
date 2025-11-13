@@ -70,4 +70,39 @@ public class RealEstateController {
         return "입력 성공 : " + count;
     }
 
+    @ResponseBody
+    @RequestMapping("/insert/2")
+    public String addRealEstateByRealtorId(@RequestParam("realtorId") int realtorId) {
+//        address : 썅떼빌리버 오피스텔 814호
+//        area : 45
+//        type : 월세
+//        price : 100000
+//        rentPrice : 120
+
+        int count = realEstateService.createRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+
+        return "입력 성공 : " + count;
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/modify")
+    public String modifyRealEstate() {
+//        id가 22인 행의 type을 전세로 바꾸고 price를 70000으로 변경하세요.
+
+        int count = realEstateService.updateRealEstate(22, "전세", 70000);
+
+        return "수정 성공 : " + count;
+    }
+
+    @ResponseBody
+    @RequestMapping("/remove")
+    public String removeRealEstate(@RequestParam("id") int id) {
+
+        int count = realEstateService.deleteRealEstate(id);
+        return "삭제 성공 : " + count;
+    }
+
+
+
 }
