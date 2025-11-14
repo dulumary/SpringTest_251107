@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>판매자 정보</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <h2>판매자 정보</h2>
+        <img width="200" th:src="${seller.profileImage}" src="https://cdn.pixabay.com/photo/2025/09/26/09/28/ball-9856638_1280.jpg">
+        <div class="display-4" th:text="${seller.nickname}">닉네임</div>
+        <h3 class="text-warning" th:text="${seller.temperature}">42.5</h3>
+
+    </div>
+
+</body>
+</html>
