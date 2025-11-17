@@ -33,4 +33,6 @@ public class SellerService {
         Seller seller = sellerRepository.selectSeller(id);
         return seller;
     }
+
+
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공인중개사 추가</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <h3>공인중개사 추가</h3>
+        <form method="get" action="/mvc/realtor/add">
+            <label>상호명</label>
+            <input type="text" class="form-control col-5" name="office">
+            <label>전화번호</label>
+            <input type="text" class="form-control col-5" name="phoneNumber">
+            <label>주소</label>
+            <input type="text" class="form-control col-5" name="address">
+            <label>등급</label>
+            <input type="text" class="form-control col-5" name="grade">
+            <button type="sumbit" class="btn btn-primary">추가</button>
+        </form>
+    </div>
+
+</body>
+</html>
