@@ -1,0 +1,18 @@
+#wrap {
+    width:1200px;
+}
+
+.contents > .main-menu {
+    background-color:cornflowerblue;
+}
+
+
+.input-label {
+    width:120px;
+    text-align:right;
+    margin-right:10px;
+}
+
+footer {
+    height:100px;
+}
