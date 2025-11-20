@@ -22,4 +22,49 @@
         FROM
             `weatherhistory`
     </select>
+
+    <insert id="insertWeather" parameterType="map">
+        INSERT INTO
+            `weatherhistory`
+        (
+            `weather`
+            , `date`
+            , `temperatures`
+            , `precipitation`
+            , `micro_dust`
+            , `wind_speed`
+        )
+        VALUE
+        (
+            #{weather}
+            , #{date}
+            , #{temperatures}
+            , #{precipitation}
+            , #{microDust}
+            , #{windSpeed}
+        )
+    </insert>
+
+    <insert id="insertWeatherByObject"
+    parameterType="com.marondal.springtest.thymeleaf.domain.Weather">
+        INSERT INTO
+            `weatherhistory`
+        (
+              `weather`
+            , `date`
+            , `temperatures`
+            , `precipitation`
+            , `micro_dust`
+            , `wind_speed`
+        )
+        VALUE
+        (
+            #{weather}
+            , #{date}
+            , #{temperatures}
+            , #{precipitation}
+            , #{microDust}
+            , #{windSpeed}
+        )
+    </insert>
 </mapper>

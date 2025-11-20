@@ -1,5 +1,7 @@
 package com.marondal.springtest.thymeleaf.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -7,6 +9,7 @@ public class Weather {
 
     private int id;
     private String weather;
+    @DateTimeFormat(pattern="yyyy년 M월 d일")
     private LocalDate date;
     private double temperatures;
     private double precipitation;
