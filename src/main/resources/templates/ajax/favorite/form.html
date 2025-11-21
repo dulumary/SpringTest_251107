@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>즐겨찾기 입력</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <h2>즐겨찾기 입력</h2>
+
+        <label>제목</label>
+        <input type="text" class="form-control" id="titleInput">
+        <label>주소</label>
+        <input type="text" class="form-control" id="addressInput">
+        <button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $("#addBtn").on("click", function() {
+            let title = $("#titleInput").val();
+            let address = $("#addressInput").val();
+
+            if(title == "") {
+                alert("제목을 입력하세요");
+                return ;
+            }
+
+            if(address == "") {
+                alert("주소를 입력하세요");
+                return ;
+            }
+
+            // 주소의 규격이 맞지 않으면
+            // https:// 로 시작하지 않고  http:// 로도 시작하지 않으면
+            if(!address.startsWith("https://") && !address.startsWith("http://")) {
+                alert("주소 규격을 확인하세요!");
+                return ;
+            }
+
+            $.ajax({
+                type:"post"
+                , url:"/ajax/favorite/add"
+                , data:{"name":title, "url":address}
+                , success:function(response) {
+                    // 성공 : {"result":"success"}
+                    // 실패 : {"result":"fail"}
+                    if(response.result == "success") {
+                        // 리스트 페이지 요청
+                        // /ajax/favorite/list
+                        //location.href = "/ajax/favorite/list";
+                    } else {
+                        alert("추가 실패!");
+                    }
+
+                }
+                , error:function() {
+                    alert("추가 에러!!");
+                }
+            });
+
+
+        });
+    </script>
+</body>
+</html>
