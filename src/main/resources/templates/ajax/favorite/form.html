@@ -14,13 +14,59 @@
         <label>제목</label>
         <input type="text" class="form-control" id="titleInput">
         <label>주소</label>
-        <input type="text" class="form-control" id="addressInput">
+        <div class="d-flex">
+            <input type="text" class="form-control" id="addressInput">
+            <button type="button" class="btn btn-success col-2 ml-3" id="duplicateBtn">중복확인</button>
+        </div>
+        <div id="duplicateText" class="small text-danger d-none">중복된 URL 입니다</div>
+        <div id="availableText"  class="small text-info d-none">저장 가능한 URL 입니다</div>
         <button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
     </div>
 
 
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        $("#duplicateBtn").on("click", function() {
+            let address = $("#addressInput").val();
+
+            if(address == "") {
+                alert("주소를 입력하세요");
+                return ;
+            }
+
+            // 주소의 규격이 맞지 않으면
+            // https:// 로 시작하지 않고  http:// 로도 시작하지 않으면
+            if(!address.startsWith("https://") && !address.startsWith("http://")) {
+                alert("주소 규격을 확인하세요!");
+                return ;
+            }
+
+            $.ajax({
+                type:"post"
+                , url:"/ajax/favorite/duplicate-url"
+                , data:{"url":address}
+                , success:function(response) {
+                    // {"isDuplicate":true}
+                    // {"isDuplicate":false}
+                    if(response.isDuplicate) {
+
+                        $("#duplicateText").removeClass("d-none");
+                        $("#availableText").addClass("d-none");
+                    } else {
+
+                        $("#availableText").removeClass("d-none");
+                        $("#duplicateText").addClass("d-none");
+                    }
+                }
+                , error:function() {
+                    alert("중복확인 에러!");
+                }
+            });
+
+
+        });
+
         $("#addBtn").on("click", function() {
             let title = $("#titleInput").val();
             let address = $("#addressInput").val();
