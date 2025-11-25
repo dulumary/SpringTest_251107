@@ -92,16 +92,24 @@ public class BookingController {
     // 이름과 전화번호가 일치하는 예약 정보  응담에 담는 API
     @ResponseBody
     @GetMapping("/search")
-    public Booking searchBooking(
+    public Map<String, Object> searchBooking(
             @RequestParam("name") String name
             , @RequestParam("phoneNumber") String phoneNumber) {
 
         Booking booking = bookingService.getBooking(name, phoneNumber);
 
+        Map<String, Object> resultMap = new HashMap<>();
         // 예약정보
-        // {"name":"김인규", "day":2, "headcount":5 ... }
+        // {"result":"success", "booking":{"name":"김인규", "day":3, "headcount":.... }}
+        // {"result":"fail"}
 
-        return booking;
+        if(booking != null) {
+            resultMap.put("result", "success");
+            resultMap.put("booking", booking);
+        } else {
+            resultMap.put("result", "fail");
+        }
+        return resultMap;
 
     }
 

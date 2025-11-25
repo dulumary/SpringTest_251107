@@ -91,20 +91,23 @@
             , success:function(response) {
 
                 // {
-                //     "id": 2,
-                //     "name": "김종국",
-                //     "headcount": 4,
-                //     "day": 1,
-                //     "date": "2025-08-04",
-                //     "phoneNumber": "010-1212-2121",
-                //     "state": "확정",
-                //     "createdAt": "2025-10-16T16:14:27",
-                //     "updatedAt": "2025-10-16T16:14:27"
+                //     "result": "success",
+                //     "booking": {
+                //          "id": 2,
+                //         "name": "김종국",
+                //         "headcount": 4,
+                //         "day": 1,
+                //         "date": "2025-08-04",
+                //         "phoneNumber": "010-1212-2121",
+                //         "state": "확정",
+                //         "createdAt": "2025-10-16T16:14:27",
+                //         "updatedAt": "2025-10-16T16:14:27"
+                //      }
                 // }
-                if(response == "") {
+                if(response.result == "fail") {
                     alert("조회결과가 없습니다");
                 } else {
-                    alert("이름 : " + response.name + "\n날짜 : " + response.date + "\n일수 : " + response.day);
+                    alert("이름 : " + response.booking.name + "\n날짜 : " + response.booking.date + "\n일수 : " + response.booking.day);
                 }
 
 
