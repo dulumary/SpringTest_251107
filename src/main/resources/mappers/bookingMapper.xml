@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.marondal.springtest.ajax.repository.BookingRepository">
+
+    <select id="selectBookingList"
+    resultType="com.marondal.springtest.ajax.domain.Booking">
+        SELECT
+            `id`
+             , `name`
+             , `headcount`
+             , `day`
+             , `date`
+             , `phone_number`
+             , `state`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `booking`
+        ORDER BY
+            `id` DESC
+    </select>
+
+    <delete id="deleteBooking" parameterType="int">
+        DELETE FROM
+            `booking`
+        WHERE
+            `id` = #{id}
+    </delete>
+
+    <insert id="insertBooking" parameterType="map">
+        INSERT INTO
+            `booking`
+        (
+            `name`
+            , `headcount`
+            , `day`
+            , `date`
+            , `phone_number`
+            , `state`
+        )
+        VALUE
+        (
+            #{name}
+            , #{headcount}
+            , #{day}
+            , #{date}
+            , #{phoneNumber}
+            , '대기중'
+        )
+    </insert>
+
+    <select id="selectBooking" parameterType="map"
+    resultType="com.marondal.springtest.ajax.domain.Booking">
+        SELECT
+            `id`
+             , `name`
+             , `headcount`
+             , `day`
+             , `date`
+             , `phone_number`
+             , `state`
+             , `created_at`
+             , `updated_at`
+        FROM
+            `booking`
+        WHERE
+            `name` = #{name}
+            AND `phone_number` = #{phoneNumber}
+    </select>
+
+</mapper>

@@ -38,24 +38,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>김인규</td>
-                    <td>2025년 2월 23일</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>010-1111-2222</td>
-                    <td class="text-success">확정</td>
-                    <td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
+                <tr th:each="booking:${bookingList}">
+                    <td th:text="${booking.name}">김인규</td>
+                    <td th:text="${#temporals.format(booking.date, 'yyyy년 M월 d일')}">2025년 2월 23일</td>
+                    <td th:text="${booking.day}">1</td>
+                    <td th:text="${booking.headcount}">2</td>
+                    <td th:text="${booking.phoneNumber}">010-1111-2222</td>
+                    <td class="text-success" th:switch="${booking.state}">
+                        <span th:case="확정" class="text-success">확정</span>
+                        <span th:case="대기중" class="text-info">대기중</span>
+                        <span th:case="취소" class="text-danger">취소</span>
+                        <span th:case="*" th:text="${booking.state}"></span>
+                    </td>
+                    <td><button type="button" th:data-booking-id="${booking.id}" class="btn btn-danger btn-sm remove-btn">삭제</button></td>
                 </tr>
-                <tr>
-                    <td>유재석</td>
-                    <td>2026년 1월 8일</td>
-                    <td>3</td>
-                    <td>10</td>
-                    <td>010-1111-2222</td>
-                    <td class="text-info">대기중</td>
-                    <td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
-                </tr>
+
             </tbody>
 
         </table>
@@ -70,9 +67,33 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 <script>
+    $(".remove-btn").on("click", function() {
 
+       let id = $(this).data("booking-id");
+
+       $.ajax({
+           type:"get"
+           , url:"/ajax/booking/remove"
+           , data:{"id":id}
+           , success:function(response) {
+               // {"result":"success"}
+               // {"result":"fail"}
+               if(response.result == "success") {
+                    location.reload();
+               } else {
+                   alert("삭제 실패!!");
+               }
+
+           }
+           , error:function() {
+               alert("삭제 에러!!");
+           }
+
+       });
+
+
+    });
 </script>
 </body>
 </html>

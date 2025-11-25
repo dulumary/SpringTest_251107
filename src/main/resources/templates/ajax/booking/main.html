@@ -69,7 +69,54 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 <script>
+    $("#searchBtn").on("click", function() {
 
+        let name = $("#nameInput").val();
+        let phoneNumber =  $("#phoneNumberInput").val();
+
+        if(name == "") {
+            alert("이름을 입력하세요");
+            return ;
+        }
+
+        if(phoneNumber == "") {
+            alert("전화번호를 입력하세요");
+            return ;
+        }
+
+        $.ajax({
+            type:"get"
+            , url:"/ajax/booking/search"
+            , data:{"name":name, "phoneNumber":phoneNumber}
+            , success:function(response) {
+
+                // {
+                //     "id": 2,
+                //     "name": "김종국",
+                //     "headcount": 4,
+                //     "day": 1,
+                //     "date": "2025-08-04",
+                //     "phoneNumber": "010-1212-2121",
+                //     "state": "확정",
+                //     "createdAt": "2025-10-16T16:14:27",
+                //     "updatedAt": "2025-10-16T16:14:27"
+                // }
+                if(response == "") {
+                    alert("조회결과가 없습니다");
+                } else {
+                    alert("이름 : " + response.name + "\n날짜 : " + response.date + "\n일수 : " + response.day);
+                }
+
+
+
+            }
+            , error:function() {
+                alert("조회 에러!!");
+            }
+        });
+
+
+    });
 </script>
 </body>
 </html>
