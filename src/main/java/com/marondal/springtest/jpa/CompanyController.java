@@ -18,7 +18,6 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-
     @ResponseBody
     @GetMapping("/add")
     public List<Company> addCompany() {
@@ -39,5 +38,24 @@ public class CompanyController {
 
         return companyList;
 
+    }
+
+    @ResponseBody
+    @GetMapping("/modify")
+    public Company modifyCompany() {
+        // id가 8인 회사 정보의 규모를 중소기업, 사원수를 34명으로 수정
+        Company company = companyService.updateCompany(8, "중소기업", 34);
+
+        return company;
+    }
+
+    @ResponseBody
+    @GetMapping("/remove")
+    public String removeCompany() {
+        // id가 8인 회사 정보 삭제
+
+        companyService.deleteCompany(8);
+
+        return "수행 완료";
     }
 }

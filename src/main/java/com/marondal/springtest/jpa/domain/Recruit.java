@@ -2,7 +2,6 @@ package com.marondal.springtest.jpa.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,26 +9,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Builder(toBuilder=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Table(name="`company`")
+@Table(name="`recruit`")
 @Entity
-public class Company {
+public class Recruit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String business;
-    private String scale;
-    private int headcount;
+
+    private int companyId;
+    private LocalDateTime deadline;
+    private String position;
+    private String responsibilities;
+    private String qualification;
+    private String type;
+    private String region;
+    private int salary;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 }
